@@ -33,7 +33,7 @@ class SortByFirstFeatureAndPool1D(Layer):
         n_batch = tf.shape(inputs)[0]
         n_in = tf.shape(inputs)[1]
         
-        _, I = tf.nn.top_k(tf.reduce_max(inputs, axis=2), self.noutputs)
+        _, I = tf.nn.top_k(inputs[:,:,0], self.noutputs)
         I = tf.expand_dims(I, axis=2)
         batch_range = tf.expand_dims(tf.expand_dims(tf.range(0, n_batch), axis=1), axis=1)
         batch_range = tf.tile(batch_range, [1, self.noutputs, 1])
